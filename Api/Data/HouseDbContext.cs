@@ -4,8 +4,14 @@ namespace Api.Data
 {
     public class HouseDbContext : DbContext
     {
-        public DbSet<HouseEntity> Houses => Set<HouseEntity>();
 
+        public HouseDbContext(DbContextOptions<HouseDbContext> opt) : base(opt)
+        {
+            
+        }
+
+        public DbSet<HouseEntity> Houses => Set<HouseEntity>();
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var folder = Environment.SpecialFolder.LocalApplicationData;
