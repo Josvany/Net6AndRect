@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<HouseDbContext>(opt => opt.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+builder.Services.AddScoped<IHouseRepository, HouseRepository>();
 
 var app = builder.Build();
 
@@ -22,9 +23,9 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 
-app.MapGet("/houses", (HouseDbContext dbContext) =>
+app.MapGet("/houses", (IHouseRepository repo) =>
 
-    dbContext.Houses
+    repo.GetAll()
 );
 
 app.Run();
