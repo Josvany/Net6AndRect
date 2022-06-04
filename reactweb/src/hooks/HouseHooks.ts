@@ -1,5 +1,4 @@
 import axios, { AxiosError } from "axios";
-import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import config from "../config";
 import { House } from "../types/house";
@@ -14,4 +13,14 @@ const useFetchHouses = () =>
         );
 }
 
+const useFetchHouse = (id: number) =>
+{
+    return useQuery<House, AxiosError>(["houses", id],() =>
+        axios.get(`${config.baseApiUrl}/houses/${id}`).then(
+            (resp) => resp.data)
+        );
+}
+
+
 export default useFetchHouses;
+export {useFetchHouse};
