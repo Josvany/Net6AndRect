@@ -26,10 +26,17 @@ app.UseCors(conf => conf.WithOrigins("http://localhost:3000").AllowAnyHeader().A
 app.UseHttpsRedirection();
 
 
-app.MapGet("/houses", (IHouseRepository repo) =>
+app.MapGet("/houses", (IHouseRepository repo) => repo.GetAll()).Produces<HouseDto>(StatusCodes.Status200OK);
+app.MapGet("/houses/{id:int}", async (int id, IHouseRepository repo) =>
+{
+    var houseDetail = await repo.Get(id);
+    if (houseDetail is null)
+    {
+        return Results.Problem($"House with Id : {id} not found.", statusCode:StatusCodes.Status404NotFound);
+    }
 
-    repo.GetAll()
-);
+    return Results.Ok(houseDetail);
+}).ProducesProblem(StatusCodes.Status404NotFound).Produces<HouseDetailDto>(StatusCodes.Status200OK);
 
 app.Run();
 
