@@ -1,7 +1,5 @@
 using Api.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.OpenApi;
-using Microsoft.EntityFrameworkCore;
 using MiniValidation;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -49,7 +47,7 @@ app.MapPost("/houses",async ([FromBody]HouseDetailDto dto, IHouseRepository repo
 
     var newHouse = await repo.Add(dto);
     return Results.Created($"/houses/{newHouse.Id}", newHouse);
-}).Produces<HouseDetailDto>(StatusCodes.Status201Created).ProducesValidationProblem();
+}).ProducesValidationProblem().Produces<HouseDetailDto>(StatusCodes.Status201Created);
 
 app.MapPut("/houses",async ([FromBody]HouseDetailDto dto, IHouseRepository repo) =>
 {
