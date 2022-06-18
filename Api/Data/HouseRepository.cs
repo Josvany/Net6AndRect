@@ -24,7 +24,7 @@ namespace Api.Data
         private static void DtoToEntity(HouseDetailDto dto, HouseEntity e)
         {
             e.Address = dto.Address;
-            e.Country = dto.Address;
+            e.Country = dto.Country;
             e.Description = dto.Description;
             e.Price = dto.Price;
             e.Photo = dto.Photo;

@@ -1,6 +1,6 @@
 
 import { Link, useParams } from "react-router-dom";
-import { DeleteHouse, useFetchHouse } from "../hooks/HouseHooks";
+import { useDeleteHouse, useFetchHouse } from "../hooks/HouseHooks";
 import ApiStatus from "../apiStatus";
 import { currencyFormatter } from "../config";
 import defaultImage from "./defaultPhoto";
@@ -13,7 +13,7 @@ const HouseDetail = () => {
 
   const { data, status, isSuccess } = useFetchHouse(houseId);
 
-  const deleteHouseMutation = DeleteHouse();
+  const deleteHouseMutation = useDeleteHouse();
 
   if (!isSuccess) return <ApiStatus status={status} />;
 
@@ -31,10 +31,7 @@ const HouseDetail = () => {
         </div>
         <div className="row mt-3">
           <div className="col-2">
-            <Link
-              className="btn btn-primary w-100"
-              to={`/house/edit/${data.id}`}
-            >
+            <Link className="btn btn-primary w-100" to={`/house/edit/${data.id}`}>
               Edit
             </Link>
           </div>

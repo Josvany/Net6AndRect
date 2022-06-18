@@ -27,8 +27,8 @@ app.UseCors(conf => conf.WithOrigins("http://localhost:3000").AllowAnyHeader().A
 
 app.UseHttpsRedirection();
 
-
 app.MapGet("/houses", (IHouseRepository repo) => repo.GetAll()).Produces<HouseDto>(StatusCodes.Status200OK);
+
 app.MapGet("/houses/{id:int}", async (int id, IHouseRepository repo) =>
 {
     var houseDetail = await repo.Get(id);

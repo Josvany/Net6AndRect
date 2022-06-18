@@ -1,10 +1,10 @@
-import { AddHouse } from "../hooks/HouseHooks";
+import { useAddHouse } from "../hooks/HouseHooks";
 import { House } from "../types/house";
 import HouseForm from "./HouseForm";
 
 const HouseAdd = () => 
 {
-    const addHouseMutation = AddHouse();
+    const addHouseMutation = useAddHouse();
     const house: House = {
         address: "",
         country: "",

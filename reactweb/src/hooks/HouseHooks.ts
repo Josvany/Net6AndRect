@@ -23,7 +23,7 @@ const useFetchHouse = (id: number) =>
 }
 
 
-const AddHouse = () =>
+const useAddHouse = () =>
 {
     const nav = useNavigate();
     const queryClient = useQueryClient();
@@ -39,7 +39,7 @@ const AddHouse = () =>
     );
 }
 
-const UpdateHouse = () =>
+const useUpdateHouse = () =>
 {
     const nav = useNavigate();
     const queryClient = useQueryClient();
@@ -49,13 +49,13 @@ const UpdateHouse = () =>
         {
             onSuccess: (_, house) => {
                 queryClient.invalidateQueries("houses");
-                nav(`/houses/${house.id}`);
+                nav(`/house/${house.id}`);
             } 
         }
     );
 }
 
-const DeleteHouse = () =>
+const useDeleteHouse = () =>
 {
     const nav = useNavigate();
     const queryClient = useQueryClient();
@@ -64,7 +64,7 @@ const DeleteHouse = () =>
         (h) => axios.delete(`${config.baseApiUrl}/houses/${h.id}`),
         {
             onSuccess: () => {
-                queryClient.invalidateQueries("houses");
+                queryClient.invalidateQueries("house");
                 nav("/");
             } 
         }
@@ -72,4 +72,4 @@ const DeleteHouse = () =>
 }
 
 export default useFetchHouses;
-export {useFetchHouse, AddHouse, UpdateHouse, DeleteHouse};
+export {useFetchHouse, useAddHouse, useUpdateHouse, useDeleteHouse};
