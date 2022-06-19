@@ -16,7 +16,7 @@ const Bids = ({ house }: Args) => {
   const emptyBid = {
     id: 0,
     houseId: house.id,
-    bidder: "",
+    bidder: "", 
     amount: 0,
   };
   const [bid, setBid] = useState<Bid>(emptyBid);
