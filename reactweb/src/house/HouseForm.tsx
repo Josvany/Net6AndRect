@@ -81,7 +81,7 @@ const HouseForm = ({ house, submitted} : Args) =>
         />
       </div>
       <div className="mt-2">
-        <img src={houseState.photo}></img>
+        <img alt="" src={houseState.photo}></img>
       </div>
      
       <button className="btn btn-primary mt-2" disabled={!houseState.address } onClick={onSubmit}>
